@@ -1,0 +1,87 @@
+﻿@{
+    Layout = "../_Layout.cshtml";
+    var usuario = Request.Form["admin"];
+    var clave = Request.Form["password"];
+    var con = Database.Open("disco"); 
+    var query = String.Format("select * from Acceso where Usuario='{0}' and Clave='{1}'",usuario,clave);
+    var datos = con.QuerySingle(query);
+    con.Close();
+}
+
+<p>@datos</p>
+@if(datos!=null){
+    
+    <div class="row">                                                                                                                                                                                                                                                                                                              
+    <div class="col-xs-4">
+        <div class="panel panel-default">
+            <div class="panel-heading"  style="font-size: 1.5em; font-weight: bold;">
+                Producto
+            </div>
+            <div class="panel-body" id="producto">
+                <div class="input-group">
+                    <span class="input-group-addon">Título:</span>
+                    <input type="text" class="form-control" placeholder="Título">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">Portada:</span>
+                    <input type="text" class="form-control" placeholder="Portada">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">Precio:</span>
+                    <input type="text" class="form-control" placeholder="Precio">
+                </div>
+                <div class="input-group" style="display: none;">
+                    <span class="input-group-addon">Estrellas(Valoración):</span>
+                    <input type="text" class="form-control" placeholder="Valoración">
+                </div>
+                <div class="input-group">
+                    <span class="" hidden>Descripción:</span>
+                    <textarea class="form-control" placeholder="Descripción" style="min-width: 270px;"></textarea>
+                </div>
+               
+            </div>
+            <div class="panel-footer"><input type="button" class="btn btn-default" value="Agregar Producto"></div>
+        </div>
+    </div>
+    <!--new col-->
+    <div class="col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading" id="info">
+               
+                    <span>
+                        <input name="radiog_dark" id="rConsulta" class="css-checkbox" name="informe" type="radio">
+                        <label for="rConsulta" class="css-label radGroup2">Consulta</label>
+                    </span>
+                    <span>
+                        <input name="radiog_dark" id="rReporte" class="css-checkbox" checked="checked" name="informe" type="radio">
+                        <label for="rReporte" class="css-label radGroup2">Reporte</label>
+                    </span>
+                    <input type="button" id="bt" value="click me!" />
+                    <select hidden>
+                        <option>Fecha de entrada</option>
+                        <option>Titulo</option>
+                        <option>Precio</option>
+                        <option>Estrellas</option>
+                    </select>
+                
+                
+            </div>
+            <div class="panel-body" id="informe">
+                conenido
+            </div>
+            <div class="panel-footer">totales</div>
+        </div>
+    </div>
+    <!--new col-->
+    
+</div>
+
+
+
+
+}else{
+    
+    Response.Redirect("/");
+}
+
+ADMINISTAR

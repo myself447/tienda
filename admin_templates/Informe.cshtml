@@ -1,0 +1,34 @@
+﻿
+@{
+    
+
+bool consulta = Convert.ToBoolean(Request.QueryString["consulta"]);
+bool reporte = Convert.ToBoolean(Request.QueryString["reporte"]);
+
+/*if(consulta==true){
+
+    Write("Consultando");
+
+}else if(reporte==true){
+
+   Write("Reportando");
+}*/
+
+
+}
+
+
+
+
+@if(consulta==true){
+
+    <text>
+        Write
+    </text>
+
+}else if(reporte==true){
+
+     <text> 
+        Writemmmm
+    </text>
+}
