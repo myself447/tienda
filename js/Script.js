@@ -84,3 +84,12 @@ function () {
 }
 
 );
+
+$("#producto div:nth-of-type(2) > span").click(function () {
+    $("#buscar").click();
+    
+});
+
+$("#buscar").change(function(){
+    $("input[name='portada']").attr("value",$("#buscar").val());
+});

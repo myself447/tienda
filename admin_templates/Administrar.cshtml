@@ -20,15 +20,18 @@
             <div class="panel-body" id="producto">
                 <div class="input-group">
                     <span class="input-group-addon">Título:</span>
-                    <input type="text" class="form-control" placeholder="Título">
+                    <input type="text" class="form-control" name="titulo" placeholder="Entre el Título">
                 </div>
                 <div class="input-group">
-                    <span class="input-group-addon">Portada:</span>
-                    <input type="text" class="form-control" placeholder="Portada">
+                    @*<span class="input-group-addon" >Portada:</span>*@
+                    <input type="text" class="form-control" name="portada" placeholder="Busque la Portada">
+                    <input type="file" id="buscar">
+                    <span class="input-group-addon" ><span class="glyphicon glyphicon-search"></span></span>
+                    
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">Precio:</span>
-                    <input type="text" class="form-control" placeholder="Precio">
+                    <input type="text" class="form-control" name="precio" placeholder="Entre el Precio">
                 </div>
                 <div class="input-group" style="display: none;">
                     <span class="input-group-addon">Estrellas(Valoración):</span>
@@ -36,7 +39,7 @@
                 </div>
                 <div class="input-group">
                     <span class="" hidden>Descripción:</span>
-                    <textarea class="form-control" placeholder="Descripción" style="min-width: 270px;"></textarea>
+                    <textarea class="form-control" placeholder="Descripción" name="desc" style="min-width: 270px;"></textarea>
                 </div>
                
             </div>
@@ -84,4 +87,3 @@
     Response.Redirect("/");
 }
 
-ADMINISTAR
