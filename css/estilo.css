@@ -183,14 +183,15 @@ input[type=radio].css-checkbox {
 
 }
 
-#producto div:nth-of-type(2) > span:hover{
+#producto div:nth-of-type(2) > span:hover, #producto div:nth-of-type(6) ~ div > span:hover{
     
     cursor: pointer;
     border: solid 2px grey;
     
 }
 
-#producto div:nth-of-type(2) input[type="file"]{
+#producto div:nth-of-type(2) input[type="file"], #producto div:nth-of-type(6) ~ div input[type="file"]{
     
     display: none;
 }
+

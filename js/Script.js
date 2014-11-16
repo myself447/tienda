@@ -93,3 +93,13 @@ $("#producto div:nth-of-type(2) > span").click(function () {
 $("#buscar").change(function(){
     $("input[name='portada']").attr("value",$("#buscar").val());
 });
+
+$("#producto div:nth-of-type(6) ~ div > span").click(function () {
+    $(".busqueda").click();
+
+});
+
+$(".busqueda").change(function () {
+    alert('ki');
+
+});
