@@ -52,22 +52,6 @@ $('.datepicker').eq(0).pikaday('show').pikaday('gotoYear', 2042);
 
 $('#bt').click(
 function () {
-    //alert($('#rReporte').prop('checked'));
-    /* var con = new XMLHttpRequest();
-
-    con.onreadystatechange = function () {
-    if (con.readyState == 4 && con.status == 200) {
-    var XML = con.responseText;
-    var result = XML;
-    alert(result);
-    }
-
-    }
-    var consulta = $('#rConsulta').prop('checked'); var reporte = $('#rReporte').prop('checked');
-    var url = "admin_templates/Informe.cshtml?consulta=" + consulta + "&reporte=" + reporte;
-    con.open("GET", url, true);
-    con.send();*/
-
 
     var consulta = $('#rConsulta').prop('checked'); var reporte = $('#rReporte').prop('checked');
     $.ajax({
@@ -94,12 +78,36 @@ $("#buscar").change(function(){
     $("input[name='portada']").attr("value",$("#buscar").val());
 });
 
-$("#producto div:nth-of-type(6) ~ div > span").click(function () {
-    $(".busqueda").click();
 
-});
+function grabs(element){
+    $("input[name=busqueda" + element.id + "]").click();
+}
 
-$(".busqueda").change(function () {
-    alert('ki');
+function cambio(element){
+    
+    var x = String(element.name); x = x.substring(8);  
+    var number = parseInt(x) + 1; //alert(String(number));
+    var busqueda = "busqueda" + String(number);
+    alert(element.value);
+    $("#" + element.name).attr("value", element.value);
+    var files = document.querySelectorAll("#producto div input[name=ruta]");
+    var agregar = true;
+    for (i = 0; i < files.length;i++){
 
-});
+        if(files[i].value=="" || files[i].value==null){
+            agregar = false;
+            break;
+        }
+    }
+    if (agregar) {
+        $("#producto").append(
+           "<div class='input-group'> \
+                <input type='text' name='ruta' class='form-control' id='" + busqueda + "' placeholder='Busque Grabación'> \
+                <input type='file' name='" + busqueda + "' onchange='cambio(this);'> \
+                <span class='input-group-addon' id='" + number + "' onclick='grabs(this);'><span class='glyphicon glyphicon-search'></span></span> \
+            </div>"
+    );
+    }
+
+
+}

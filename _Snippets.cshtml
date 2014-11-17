@@ -371,3 +371,45 @@ input:focus {
               </div>
             </div>
             <!--Modal-->
+
+
+  //alert($('#rReporte').prop('checked'));
+    /* var con = new XMLHttpRequest();
+
+    con.onreadystatechange = function () {
+    if (con.readyState == 4 && con.status == 200) {
+    var XML = con.responseText;
+    var result = XML;
+    alert(result);
+    }
+
+    }
+    var consulta = $('#rConsulta').prop('checked'); var reporte = $('#rReporte').prop('checked');
+    var url = "admin_templates/Informe.cshtml?consulta=" + consulta + "&reporte=" + reporte;
+    con.open("GET", url, true);
+    con.send();*/
+
+
+
+/*$("#producto div:nth-of-type(6) ~ div > span").click(function () {
+    alert($(this).attr("id"));
+    $("input[name=busqueda" + $(this).attr("id") + "]").click();
+
+});*/
+
+/*$("#producto div:nth-of-type(6) ~ div > input[type=file]").change(function () {
+    var x = String($(this).attr("name")); x = x.substring(8);  
+    var number = parseInt(x) + 1; //alert(String(number));
+    var busqueda = "busqueda" + String(number);
+    $("#" + $(this).attr("name")).attr("value", $(this).val());
+
+    $("#producto").append(
+    "<div class='input-group'> \
+        <input type='text' class='form-control' id='" + busqueda + "' placeholder='Busque Grabación'> \
+        <input type='file' name='" + busqueda + "' onchange='cambio(this);'> \
+        <span class='input-group-addon' id='" + number + "' onclick='grabs(this);'><span class='glyphicon glyphicon-search'></span></span> \
+    </div>"
+    );
+
+});*/
+
