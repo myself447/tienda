@@ -88,7 +88,7 @@ function cambio(element){
     var x = String(element.name); x = x.substring(8);  
     var number = parseInt(x) + 1; //alert(String(number));
     var busqueda = "busqueda" + String(number);
-    alert(element.value);
+    //alert(element.value);
     $("#" + element.name).attr("value", element.value);
     var files = document.querySelectorAll("#producto div input[name=ruta]");
     var agregar = true;
@@ -109,5 +109,32 @@ function cambio(element){
     );
     }
 
+
+}
+
+function add_update(element){
+    var accion = "";
+    if(element.value=="Agregar Producto"){
+
+        accion = "guardar";
+        
+    }
+    else if(element.value=="Actualizar Producto"){
+
+        accion = "actualizar";
+    }
+    var files = document.querySelectorAll("#producto div input[name=ruta]");
+    $.ajax({
+        url: "admin_templates/CRUD.cshtml",
+        dataType: "text",
+        type: "POST",
+        data: { "titulo": $("input[name=titulo]").val(), "desc": $("#desc").val(), "portada": $("input[name=portada]").val(),
+            "precio": $("input[name=precio]").val(), "ref": $("#ref").val(), "files": files, "accion":accion},
+        success: function (content) {
+
+            alert(content);
+        }
+
+    });
 
 }
