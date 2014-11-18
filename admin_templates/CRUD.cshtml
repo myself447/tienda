@@ -1,12 +1,30 @@
-﻿@{
+﻿
+    @{
     
-<text> @Request.Form["desc"] </text>
+/*<text> @Request.Form["desc"] </text>
 <text> @Request.Form["ref"] </text>
 <text> @Request.Form["titulo"] </text>
 <text> @Request.Form["portada"] </text>
-<text> @Request.Form["precio"] </text>
+<text> @Request.Form["precio"] </text>*/
+//StreamWriter f = new StreamWriter("C:/T/FILE.TXT");
+//Json.Write(Request.Form["files"].ToString());
+//f.Write(Request.Form["files"].ToString());
+var json = @Request.Form["files"];
+/*<text> @Request.Form["files"].ToString() </text>
+
 <text> @Request.Form["files"] </text>
 
+<text>@Json.Decode(Request.Form["files"]).ToString() </text>*/
 }
 
-<p>Hi from the CRUD file!!</p>
+@*foreach(String esto in Json.Decode(Request.Form["files"])){
+    
+    <text>@esto</text>
+}*@
+
+@*<p>@f.Write(Json.Decode(Request.Form["files"]).ToString());</p>*@
+
+@{
+    <text>@json</text>
+}
+

@@ -3,7 +3,7 @@
     console.log(caption);
     });
 
-    function cargarListado(){
+   /* function cargarListado(){
 
        
         var con = new XMLHttpRequest();
@@ -19,7 +19,7 @@
 
         con.open("GET","templates/Listado.cshtml",true);
         con.send();
-    }
+    }*/
 
 
 
@@ -38,9 +38,9 @@
     function () { alert("clickeado"); }
     );*/
 
-  $(function() {
+  /*$(function() {
     $( "#datepicker" ).datepicker();
-  });
+  });*/
 
  // var picker = new Pikaday({ field: $('#datepicker')[0] });
 
@@ -123,18 +123,26 @@ function add_update(element){
 
         accion = "actualizar";
     }
-    var files = document.querySelectorAll("#producto div input[name=ruta]");
+    //var files = new Array(document.querySelectorAll("#producto div input[name=ruta]"));
+    var files =  document.querySelectorAll("#producto div input[name=ruta]"); //alert(files);
+    var archivos = {};
+    for (var i = 0; i < files.length;i++ ){
+        
+        archivos[i] = files[i].value;
+        //alert(archivos[i].value);
+        
+    } alert(JSON.stringify(archivos)); //alert(String(archivos));
     $.ajax({
         url: "admin_templates/CRUD.cshtml",
-        dataType: "text",
         type: "POST",
+        //contentType: "charset=utf-8; charset=UTF-8;",
+        dataType: "TEXT",
         data: { "titulo": $("input[name=titulo]").val(), "desc": $("#desc").val(), "portada": $("input[name=portada]").val(),
-            "precio": $("input[name=precio]").val(), "ref": $("#ref").val(), "files": files, "accion":accion},
+            "precio": $("input[name=precio]").val(), "ref": $("#ref").val(), "files": JSON.stringify(archivos), "accion": accion
+        }, 
         success: function (content) {
-
             alert(content);
         }
-
     });
 
 }
