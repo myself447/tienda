@@ -1,5 +1,6 @@
 ﻿
 @using Newtonsoft.Json;
+@using FreshUpload.Server;
     @{
     
 /*<text> @Request.Form["desc"] </text>
@@ -27,10 +28,11 @@ var lector = new JsonTextReader(new StringReader(json));
     <text></text>
     while(lector.Read()){
     <text>@lector.Value</text>
+   // <text>@Request.Files[0].FileName.ToString()</text>
 }
 }
 
 @{
-    
+    //UploadHelper.ProcessRequest()
 
 }

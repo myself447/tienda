@@ -138,11 +138,37 @@ function add_update(element){
         //contentType: "charset=utf-8; charset=UTF-8;",
         dataType: "HTML",
         data: { "titulo": $("input[name=titulo]").val(), "desc": $("#desc").val(), "portada": $("input[name=portada]").val(),
-            "precio": $("input[name=precio]").val(), "ref": $("#ref").val(), "files": JSON.stringify(archivos), "accion": accion
-        }, 
+            "precio": $("input[name=precio]").val(), "ref": $("#ref").val(), "files": JSON.stringify(archivos), "accion": accion},
+       // processData: false,
         success: function (content) {
             alert(content);
         }
     });
+
+    
+  
+   function upload() 
+   {
+        var client = new XMLHttpRequest();
+      var file = document.getElementById("uploadfile");
+     
+      /* Create a FormData instance */
+      var formData = new FormData();
+      /* Add the file */ 
+      formData.append("upload", file.files[0]);
+
+      client.open("post", "/upload", true);
+      client.setRequestHeader("Content-Type", "multipart/form-data");
+      client.send(formData);  /* Send to server */ 
+   }
+     
+   /* Check the response status */  
+   client.onreadystatechange = function() 
+   {
+      if (client.readyState == 4 && client.status == 200) 
+      {
+         alert(client.statusText);
+      }
+   }
 
 }
