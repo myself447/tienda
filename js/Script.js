@@ -128,7 +128,7 @@ function add_update(element){
     var archivos = {};
     for (var i = 0; i < files.length;i++ ){
         
-        archivos[i] = files[i].value;
+        archivos[String.fromCharCode(i+97)] = files[i].value; 
         //alert(archivos[i].value);
         
     } alert(JSON.stringify(archivos)); //alert(String(archivos));
@@ -136,7 +136,7 @@ function add_update(element){
         url: "admin_templates/CRUD.cshtml",
         type: "POST",
         //contentType: "charset=utf-8; charset=UTF-8;",
-        dataType: "TEXT",
+        dataType: "HTML",
         data: { "titulo": $("input[name=titulo]").val(), "desc": $("#desc").val(), "portada": $("input[name=portada]").val(),
             "precio": $("input[name=precio]").val(), "ref": $("#ref").val(), "files": JSON.stringify(archivos), "accion": accion
         }, 
