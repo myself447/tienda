@@ -1,6 +1,5 @@
 ﻿
 @using Newtonsoft.Json;
-@using System.Collections;
     @{
     
 /*<text> @Request.Form["desc"] </text>
@@ -8,32 +7,13 @@
 <text> @Request.Form["titulo"] </text>
 <text> @Request.Form["portada"] </text>
 <text> @Request.Form["precio"] </text>*/
-//StreamWriter f = new StreamWriter("C:/T/FILE.TXT");
-//Json.Write(Request.Form["files"].ToString());
-//f.Write(Request.Form["files"].ToString());
 var json = @Request.Form["files"];
 dynamic js = @JsonConvert.DeserializeObject(json);
 var a = js.b;
 var lector = new JsonTextReader(new StringReader(json));
-//dynamic son = JO
-//var js = JsonReader(json);
-// DynamicJsonObject js = @Request.Form["files"];
-/*<text> @Request.Form["files"].ToString() </text>
-
-<text> @Request.Form["files"] </text>
-
-<text>@Json.Decode(Request.Form["files"]).ToString() </text>*/
 }
 
-@*foreach(String esto in Json.Decode(Request.Form["files"])){
-    
-    <text>@esto</text>
-}*@
-
-@*<p>@f.Write(Json.Decode(Request.Form["files"]).ToString());</p>*@
-
 @{
-   // <text>@js.ToString()</text>
     <text>@json</text>
     <text> </text>
     <text>@Request.Form["files"].Length</text>
