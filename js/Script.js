@@ -152,14 +152,13 @@ function up(){
 var fileSelect = document.getElementById('file-select');
 var uploadButton = document.getElementById('upload-button');
 
-form.onsubmit = function(event) {
-  event.preventDefault();
+form.onsubmit = function (event) {
+    event.preventDefault();
 
-  // Update button text.
-  uploadButton.innerHTML = 'Uploading...';
-
-  // The rest of the code will go here...
+    // The rest of the code will go here...
 }
+
+
 
 // Get the selected files from the input.
 var files = fileSelect.files;
@@ -215,18 +214,34 @@ xhr.send(formData);
 }
 
 
-function upload() {
-        var client = new XMLHttpRequest();
-        var file = document.getElementById("buscar");
-        
+function upload(valores) {
+    
+        var portada = document.getElementById('buscar');
+        var archivos = document.querySelectorAll("#producto div:nth-of-type(6) ~ div input[type=file]");
+        var form = document.getElementById('data');
+
+        data.onsubmit = function (event) {
+
+            event.preventDefault();
+            document.getElementById('up').innerHTML = " Subiendo...";
+        }
+
+
         /* Create a FormData instance */
         var formData = new FormData();
         /* Add the file */
-        formData.append("upload", file.files[0]);
+        formData.append("uploads[]", portada.files[0], portada.files[0].name);
+        for(var i=0;i<archivos.length-1;i++){
+            var archivo = archivos[i];
+            formData.append("uploads[]", archivo.files[0], archivo.files[0].name);
+        }
+        
 
-        client.open("post", "admin_templates/TestUpload.cshtml", true);
-        client.setRequestHeader("Content-Type", "multipart/form-data");
-        client.send(formData);  /* Send to server */
+
+        var client = new XMLHttpRequest();
+
+        client.open("POST", "admin_templates/TestUpload.cshtml", true);
+        //client.setRequestHeader("Content-Type", "multipart/form-data");
 
 
         /* Check the response status */
@@ -235,4 +250,6 @@ function upload() {
                 alert(client.statusText + " " + client.responseText);
             }
         }
+
+        client.send(formData);  /* Send to server */
     }

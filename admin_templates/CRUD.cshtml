@@ -1,6 +1,5 @@
 ﻿
 @using Newtonsoft.Json;
-@using System.Text;
 @*using Krystalware.UploadHelper;*@
     @{
     
@@ -13,16 +12,8 @@ var json = @Request.Form["files"];
 dynamic js = @JsonConvert.DeserializeObject(json);
 var a = js.b;
 var lector = new JsonTextReader(new StringReader(json));
-WebClient subir = new WebClient(); 
-var error ="";
 
-//string response = Encoding.UTF8.GetString(responseB);
-}
 
-@try{
-byte[] responseB = subir.UploadFile(Request.Form["buscar"].ToString(), Request.Form["portada"].ToString());
- } catch( Exception e) {
-    error = e.GetBaseException().ToString();
 }
 
 @{  //HttpUploadHelper.Upload(@Request.Form["portada"]);
