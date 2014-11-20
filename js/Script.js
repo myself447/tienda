@@ -138,37 +138,101 @@ function add_update(element){
         //contentType: "charset=utf-8; charset=UTF-8;",
         dataType: "HTML",
         data: { "titulo": $("input[name=titulo]").val(), "desc": $("#desc").val(), "portada": $("input[name=portada]").val(),
-            "precio": $("input[name=precio]").val(), "ref": $("#ref").val(), "files": JSON.stringify(archivos), "accion": accion},
+            "precio": $("input[name=precio]").val(), "ref": $("#ref").val(), "files": JSON.stringify(archivos),"buscar":$("#buscar").val() ,"accion": accion},
        // processData: false,
         success: function (content) {
             alert(content);
         }
     });
 
-    
-  
-   function upload() 
-   {
-        var client = new XMLHttpRequest();
-      var file = document.getElementById("uploadfile");
-     
-      /* Create a FormData instance */
-      var formData = new FormData();
-      /* Add the file */ 
-      formData.append("upload", file.files[0]);
-
-      client.open("post", "/upload", true);
-      client.setRequestHeader("Content-Type", "multipart/form-data");
-      client.send(formData);  /* Send to server */ 
-   }
-     
-   /* Check the response status */  
-   client.onreadystatechange = function() 
-   {
-      if (client.readyState == 4 && client.status == 200) 
-      {
-         alert(client.statusText);
-      }
-   }
-
 }
+
+function up(){
+    var form = document.getElementById('file-form');
+var fileSelect = document.getElementById('file-select');
+var uploadButton = document.getElementById('upload-button');
+
+form.onsubmit = function(event) {
+  event.preventDefault();
+
+  // Update button text.
+  uploadButton.innerHTML = 'Uploading...';
+
+  // The rest of the code will go here...
+}
+
+// Get the selected files from the input.
+var files = fileSelect.files;
+
+// Create a new FormData object.
+var formData = new FormData();
+
+
+// Loop through each of the selected files.
+for (var i = 0; i < files.length; i++) {
+  var file = files[i];
+
+  // Check the file type.
+  if (!file.type.match('image.*')) {
+    continue;
+  }
+
+  // Add the file to the request.
+  formData.append('photos[]', file, file.name);
+  //alert(file + " " + file.name);
+}
+
+// Files
+/*formData.append("whatever", file, filename);
+
+// Blobs
+//formData.append(name, blob, filename);
+
+// Strings
+//formData.append(name, value);  */
+
+// Set up the request.
+var xhr = new XMLHttpRequest();  
+
+
+// Open the connection.
+xhr.open('POST', 'admin_templates/TestUpload.cshtml', true);
+
+// Set up a handler for when the request finishes.
+xhr.onload = function () {
+    if (xhr.status === 200) {
+        // File(s) uploaded.
+        uploadButton.innerHTML = 'Upload';
+        document.getElementById("up").innerHTML = "hecho";
+        alert(xhr.responseText);
+    } else {
+        alert('Ocurrió un Error');
+    }
+};
+
+// Send the Data.
+xhr.send(formData);
+}
+
+
+function upload() {
+        var client = new XMLHttpRequest();
+        var file = document.getElementById("buscar");
+        
+        /* Create a FormData instance */
+        var formData = new FormData();
+        /* Add the file */
+        formData.append("upload", file.files[0]);
+
+        client.open("post", "admin_templates/TestUpload.cshtml", true);
+        client.setRequestHeader("Content-Type", "multipart/form-data");
+        client.send(formData);  /* Send to server */
+
+
+        /* Check the response status */
+        client.onreadystatechange = function () {
+            if (client.readyState == 4 && client.status == 200) {
+                alert(client.statusText + " " + client.responseText);
+            }
+        }
+    }

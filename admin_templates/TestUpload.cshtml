@@ -1,0 +1,10 @@
+﻿@{
+   var hola = Request.Files[0];
+   hola.SaveAs("C:/T/"+hola.FileName.ToString());
+}
+
+
+@{
+<text>@hola</text>    
+
+}

@@ -25,7 +25,7 @@
                 <div class="input-group">
                     @*<span class="input-group-addon" >Portada:</span>*@
                     <input type="text" class="form-control" name="portada" placeholder="Busque la Portada">
-                    <input type="file" id="buscar">
+                    <input type="file" id="buscar" name="buscar" accept="image/x-png, image/gif, image/jpeg">
                     <span class="input-group-addon" ><span class="glyphicon glyphicon-search"></span></span>
                     
                 </div>
@@ -91,6 +91,13 @@
 
 
 
+<input type="button" onclick="upload();" value="click" />
+
+<form id="file-form" action="admin_templates/TestUpload.schtml" method="POST">
+  <input type="file" id="file-select" name="photos[]" multiple/>
+  <button type="submit" id="upload-button" onclick="up();">Upload</button>
+</form>
+<div id="up"></div>
 
 }else{
     

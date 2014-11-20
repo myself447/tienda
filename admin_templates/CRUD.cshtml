@@ -1,6 +1,7 @@
 ﻿
 @using Newtonsoft.Json;
-@using FreshUpload.Server;
+@using System.Text;
+@*using Krystalware.UploadHelper;*@
     @{
     
 /*<text> @Request.Form["desc"] </text>
@@ -12,9 +13,20 @@ var json = @Request.Form["files"];
 dynamic js = @JsonConvert.DeserializeObject(json);
 var a = js.b;
 var lector = new JsonTextReader(new StringReader(json));
+WebClient subir = new WebClient(); 
+var error ="";
+
+//string response = Encoding.UTF8.GetString(responseB);
 }
 
-@{
+@try{
+byte[] responseB = subir.UploadFile(Request.Form["buscar"].ToString(), Request.Form["portada"].ToString());
+ } catch( Exception e) {
+    error = e.GetBaseException().ToString();
+}
+
+@{  //HttpUploadHelper.Upload(@Request.Form["portada"]);
+    //var b = new UploadFile(,);
     <text>@json</text>
     <text> </text>
     <text>@Request.Form["files"].Length</text>
@@ -29,6 +41,8 @@ var lector = new JsonTextReader(new StringReader(json));
     while(lector.Read()){
     <text>@lector.Value</text>
    // <text>@Request.Files[0].FileName.ToString()</text>
+   <text>The file path is: @Request.Form["buscar"]</text>
+   <text>@error</text>
 }
 }
 
