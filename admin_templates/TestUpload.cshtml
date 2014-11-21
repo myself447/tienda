@@ -4,10 +4,10 @@
         var archivos = Request.Files;
         var portada = archivos[0];
         portada.SaveAs(Server.MapPath("../portadas/").ToString() + portada.FileName.ToString());
-        Directory.CreateDirectory(Server.MapPath("/").ToString() + "Producto/" + Request.Form["titulo"].ToString());
+        var dir = Directory.CreateDirectory(Server.MapPath("/").ToString() + "Producto/" + Request.Form["titulo"].ToString());
         for( var i=1; i < Request.Files.Count; i++ ){
-           /*Directory.CreateDirectory(Server.MapPath("/"));
-           archivos[i].SaveAs();*/
+
+           archivos[i].SaveAs(dir.FullName.ToString() + "/" + archivos[i].FileName);
 
         }
     }catch(Exception f){
