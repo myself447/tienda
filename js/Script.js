@@ -235,6 +235,11 @@ function upload(valores) {
             var archivo = archivos[i];
             formData.append("uploads[]", archivo.files[0], archivo.files[0].name);
         }
+
+        formData.append("titulo", $("input[name=titulo]").val());
+        formData.append("precio", $("input[name=precio]").val());
+        formData.append("ref", $("input[name=ref]").val());
+        formData.append("desc", $("input[name=desc]").val());
         
 
 
@@ -255,6 +260,8 @@ function upload(valores) {
                 //alert("Un Error Ocurrió");
             }
         }
-
+        //client.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         client.send(formData);  /* Send to server */
+      
+        
     }
