@@ -223,7 +223,7 @@ function upload(valores) {
         data.onsubmit = function (event) {
 
             event.preventDefault();
-            document.getElementById('up').innerHTML = " Subiendo...";
+            document.getElementById('up').style.display = "inline";
         }
 
 
@@ -248,6 +248,11 @@ function upload(valores) {
         client.onreadystatechange = function () {
             if (client.readyState == 4 && client.status == 200) {
                 alert(client.statusText + " " + client.responseText);
+                document.getElementById('up').style.display="none";
+            }
+            else {
+
+                //alert("Un Error Ocurrió");
             }
         }
 

@@ -1,8 +1,20 @@
 ﻿@{
-   var hola = Request.Files[0];
-   var hi = Request.Files[1];
-   hola.SaveAs("C:/T/"+hola.FileName.ToString());
-   hi.SaveAs("C:/T/"+hi.FileName.ToString());
+
+    try{
+        var archivos = Request.Files;
+        var portada = archivos[0];
+        portada.SaveAs(Server.MapPath("../portadas/").ToString()+portada.FileName.ToString());
+        for( var i=1; i < Request.Files.Count; i++ ){
+           Directory.CreateDirectory(Server.MapPath("/"));
+           archivos[i].SaveAs();
+
+        }
+    }catch(Exception f){
+
+        <text>@f.Message.ToString()</text>
+
+    }
+   //hi.SaveAs("C:/T/"+hi.FileName.ToString());
   
 }
 
