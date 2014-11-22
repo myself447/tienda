@@ -61,17 +61,13 @@ function () {
         data: { "consulta": consulta, "reporte": reporte },
         success: function (html) {
         
-            $('#informe').html((html)); T
+            $('#informe').html((html));
         }
     });
-
-}
-
-);
+});
 
 $("#producto div:nth-of-type(2) > span").click(function () {
     $("#buscar").click();
-    
 });
 
 $("#buscar").change(function(){
@@ -108,160 +104,60 @@ function cambio(element){
             </div>"
     );
     }
-
-
-}
-
-function add_update(element){
-    var accion = "";
-    if(element.value=="Agregar Producto"){
-
-        accion = "guardar";
-        
-    }
-    else if(element.value=="Actualizar Producto"){
-
-        accion = "actualizar";
-    }
-    //var files = new Array(document.querySelectorAll("#producto div input[name=ruta]"));
-    var files =  document.querySelectorAll("#producto div input[name=ruta]"); //alert(files);
-    var archivos = {};
-    for (var i = 0; i < files.length;i++ ){
-        
-        archivos[String.fromCharCode(i+97)] = files[i].value; 
-        //alert(archivos[i].value);
-        
-    } alert(JSON.stringify(archivos)); //alert(String(archivos));
-    $.ajax({
-        url: "admin_templates/CRUD.cshtml",
-        type: "POST",
-        //contentType: "charset=utf-8; charset=UTF-8;",
-        dataType: "HTML",
-        data: { "titulo": $("input[name=titulo]").val(), "desc": $("#desc").val(), "portada": $("input[name=portada]").val(),
-            "precio": $("input[name=precio]").val(), "ref": $("#ref").val(), "files": JSON.stringify(archivos),"buscar":$("#buscar").val() ,"accion": accion},
-       // processData: false,
-        success: function (content) {
-            alert(content);
-        }
-    });
-
-}
-
-function up(){
-    var form = document.getElementById('file-form');
-var fileSelect = document.getElementById('file-select');
-var uploadButton = document.getElementById('upload-button');
-
-form.onsubmit = function (event) {
-    event.preventDefault();
-
-    // The rest of the code will go here...
 }
 
 
-
-// Get the selected files from the input.
-var files = fileSelect.files;
-
-// Create a new FormData object.
-var formData = new FormData();
-
-
-// Loop through each of the selected files.
-for (var i = 0; i < files.length; i++) {
-  var file = files[i];
-
-  // Check the file type.
-  if (!file.type.match('image.*')) {
-    continue;
-  }
-
-  // Add the file to the request.
-  formData.append('photos[]', file, file.name);
-  //alert(file + " " + file.name);
-}
-
-// Files
-/*formData.append("whatever", file, filename);
-
-// Blobs
-//formData.append(name, blob, filename);
-
-// Strings
-//formData.append(name, value);  */
-
-// Set up the request.
-var xhr = new XMLHttpRequest();  
-
-
-// Open the connection.
-xhr.open('POST', 'admin_templates/TestUpload.cshtml', true);
-
-// Set up a handler for when the request finishes.
-xhr.onload = function () {
-    if (xhr.status === 200) {
-        // File(s) uploaded.
-        uploadButton.innerHTML = 'Upload';
-        document.getElementById("up").innerHTML = "hecho";
-        alert(xhr.responseText);
-    } else {
-        alert('Ocurrió un Error');
-    }
-};
-
-// Send the Data.
-xhr.send(formData);
-}
-
-
-function upload(valores) {
+function upload(element) {
     
-        var portada = document.getElementById('buscar');
-        var archivos = document.querySelectorAll("#producto div:nth-of-type(6) ~ div input[type=file]");
-        var form = document.getElementById('data');
+    var portada = document.getElementById('buscar');
+    var archivos = document.querySelectorAll("#producto div:nth-of-type(6) ~ div input[type=file]");
+    var form = document.getElementById('data');
 
-        data.onsubmit = function (event) {
+    data.onsubmit = function (event) {
 
-            event.preventDefault();
-            document.getElementById('up').style.display = "inline";
-        }
+        event.preventDefault();
+        document.getElementById('up').style.display = "inline";
+    }
 
 
-        /* Create a FormData instance */
-        var formData = new FormData();
-        /* Add the file */
-        formData.append("uploads[]", portada.files[0], portada.files[0].name);
-        for(var i=0;i<archivos.length-1;i++){
-            var archivo = archivos[i];
-            formData.append("uploads[]", archivo.files[0], archivo.files[0].name);
-        }
 
-        formData.append("titulo", $("input[name=titulo]").val());
-        formData.append("precio", $("input[name=precio]").val());
-        formData.append("ref", $("input[name=ref]").val());
-        formData.append("desc", $("input[name=desc]").val());
+    /* Create a FormData instance */
+    var formData = new FormData();
+    /* Add the file */
+    formData.append("accion",element.value);
+    formData.append("uploads[]", portada.files[0], portada.files[0].name);
+    for(var i=0;i<archivos.length-1;i++){
+        var archivo = archivos[i];
+        formData.append("uploads[]", archivo.files[0], archivo.files[0].name);
+    }
+
+    formData.append("titulo", $("input[name=titulo]").val());
+    formData.append("precio", $("input[name=precio]").val());
+    formData.append("ref", $("input[name=ref]").val());
+    formData.append("desc", $("input[name=desc]").val());
         
 
 
-        var client = new XMLHttpRequest();
+    var client = new XMLHttpRequest();
 
-        client.open("POST", "admin_templates/TestUpload.cshtml", true);
-        //client.setRequestHeader("Content-Type", "multipart/form-data");
+    client.open("POST", "admin_templates/TestUpload.cshtml", true);
+    //client.setRequestHeader("Content-Type", "multipart/form-data");
 
 
-        /* Check the response status */
-        client.onreadystatechange = function () {
-            if (client.readyState == 4 && client.status == 200) {
-                alert(client.statusText + " " + client.responseText);
-                document.getElementById('up').style.display="none";
-            }
-            else {
+    /* Check the response status */
+    client.onreadystatechange = function () {
+        if (client.readyState == 4 && client.status == 200) {
 
-                //alert("Un Error Ocurrió");
-            }
+            alert(client.statusText + " " + client.responseText);
+            document.getElementById('up').style.display="none";
         }
-        //client.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        client.send(formData);  /* Send to server */
+        else {
+
+            //alert("Un Error Ocurrió");
+        }
+    }
+//client.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    client.send(formData);  /* Send to server */
       
         
-    }
+}

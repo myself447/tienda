@@ -413,3 +413,107 @@ input:focus {
 
 });*/
 
+@* ajax post *@
+
+function up(){
+    var form = document.getElementById('file-form');
+var fileSelect = document.getElementById('file-select');
+var uploadButton = document.getElementById('upload-button');
+
+form.onsubmit = function (event) {
+    event.preventDefault();
+
+    // The rest of the code will go here...
+}
+
+
+
+// Get the selected files from the input.
+var files = fileSelect.files;
+
+// Create a new FormData object.
+var formData = new FormData();
+
+
+// Loop through each of the selected files.
+for (var i = 0; i < files.length; i++) {
+  var file = files[i];
+
+  // Check the file type.
+  if (!file.type.match('image.*')) {
+    continue;
+  }
+
+  // Add the file to the request.
+  formData.append('photos[]', file, file.name);
+  //alert(file + " " + file.name);
+}
+
+// Files
+/*formData.append("whatever", file, filename);
+
+// Blobs
+//formData.append(name, blob, filename);
+
+// Strings
+//formData.append(name, value);  */
+
+// Set up the request.
+var xhr = new XMLHttpRequest();  
+
+
+// Open the connection.
+xhr.open('POST', 'admin_templates/TestUpload.cshtml', true);
+
+// Set up a handler for when the request finishes.
+xhr.onload = function () {
+    if (xhr.status === 200) {
+        // File(s) uploaded.
+        uploadButton.innerHTML = 'Upload';
+        document.getElementById("up").innerHTML = "hecho";
+        alert(xhr.responseText);
+    } else {
+        alert('Ocurrió un Error');
+    }
+};
+
+// Send the Data.
+xhr.send(formData);
+}
+
+@* ajax jquery + json  *@
+
+function add_update(element){
+    var accion = "";
+    if(element.value=="Agregar Producto"){
+
+        accion = "guardar";
+        
+    }
+    else if(element.value=="Actualizar Producto"){
+
+        accion = "actualizar";
+    }
+    //var files = new Array(document.querySelectorAll("#producto div input[name=ruta]"));
+    var files =  document.querySelectorAll("#producto div input[name=ruta]"); //alert(files);
+    var archivos = {};
+    for (var i = 0; i < files.length;i++ ){
+        
+        archivos[String.fromCharCode(i+97)] = files[i].value; 
+        //alert(archivos[i].value);
+        
+    } alert(JSON.stringify(archivos)); //alert(String(archivos));
+    $.ajax({
+        url: "admin_templates/CRUD.cshtml",
+        type: "POST",
+        //contentType: "charset=utf-8; charset=UTF-8;",
+        dataType: "HTML",
+        data: { "titulo": $("input[name=titulo]").val(), "desc": $("#desc").val(), "portada": $("input[name=portada]").val(),
+            "precio": $("input[name=precio]").val(), "ref": $("#ref").val(), "files": JSON.stringify(archivos),"buscar":$("#buscar").val() ,"accion": accion},
+       // processData: false,
+        success: function (content) {
+            alert(content);
+        }
+    });
+
+}
