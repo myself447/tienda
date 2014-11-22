@@ -1,21 +1,50 @@
 ﻿@{
+    var accion = Request.Form["accion"].ToString();
+    var producto = new Dictionary<string, dynamic>(){ 
+        {"titulo", Request.Form["titulo"]}, 
+        {"precio", Request.Form["precio"]}, 
+        {"ref", Request["ref"]}, 
+        {"desc", Request.Form["desc"]}
+    }; 
+    if(accion == "Agregar Producto"){
+        // Guardado de archivos inicia
+        try{
+            var archivos = Request.Files;
+            var portada = archivos[0];
+            var todb = Database.Open("disco");
+            portada.SaveAs(Server.MapPath("../portadas/").ToString() + portada.FileName.ToString());
+            var dir = Directory.CreateDirectory(Server.MapPath("/").ToString() + "Producto/" + Request.Form["titulo"].ToString());
+            for( var i=1; i < Request.Files.Count; i++ ){
 
-    try{
-        var archivos = Request.Files;
-        var portada = archivos[0];
-        portada.SaveAs(Server.MapPath("../portadas/").ToString() + portada.FileName.ToString());
-        var dir = Directory.CreateDirectory(Server.MapPath("/").ToString() + "Producto/" + Request.Form["titulo"].ToString());
-        for( var i=1; i < Request.Files.Count; i++ ){
+               archivos[i].SaveAs(dir.FullName.ToString() + "/" + archivos[i].FileName);
 
-           archivos[i].SaveAs(dir.FullName.ToString() + "/" + archivos[i].FileName);
+            }
+        }catch(Exception f){
+
+            <text>@f.Message.ToString()</text>
 
         }
-    }catch(Exception f){
+        // Guardado de archivos finaliza
+        
+        // Guardado de datos inicio
+        try{
+        var todb = Database.Open("disco");
+        string command = String.Format(@"INSERT INTO Producto(Titulo, Portada, Precio, Referencia, Descripcion, Fecha_entrada)values(
+        '{0}', '{1}', {2}, '{3}', '{4}', {5})",
+        producto["titulo"], portada.FileName.ToString(), producto["precio"], producto["ref"], producto["desc"], DateTime.Now.Date                         
+       );
+       /*todb.Execute();*/
+       }catch(Exception e){
+           
+           <text>@e.Message.ToString()</text>
+       }
+       // Guardado de datos finaliza
+    }
+    else if(accion == "Actulizar Producto"){
+        
 
-        <text>@f.Message.ToString()</text>
 
     }
-   //hi.SaveAs("C:/T/"+hi.FileName.ToString());
   
 }
 

@@ -124,7 +124,7 @@ function upload(element) {
     /* Create a FormData instance */
     var formData = new FormData();
     /* Add the file */
-    formData.append("accion",element.value);
+    formData.append("accion", element.value);
     formData.append("uploads[]", portada.files[0], portada.files[0].name);
     for(var i=0;i<archivos.length-1;i++){
         var archivo = archivos[i];
