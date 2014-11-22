@@ -133,9 +133,9 @@ function upload(element) {
 
     formData.append("titulo", $("input[name=titulo]").val());
     formData.append("precio", $("input[name=precio]").val());
-    formData.append("ref", $("input[name=ref]").val());
-    formData.append("desc", $("input[name=desc]").val());
-        
+    formData.append("ref", $("#ref").val());
+    formData.append("desc", $("#desc").val());
+    //alert($("#ref").val() + " " + $("#desc").val()) ;  
 
 
     var client = new XMLHttpRequest();
