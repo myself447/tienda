@@ -32,3 +32,9 @@ bool reporte = Convert.ToBoolean(Request.QueryString["reporte"]);
         Writemmmm
     </text>
 }
+
+@{
+    <text>@Request.QueryString["fecha"]</text>
+    <text>@Request.QueryString["fecha"].AsDateTime()</text>
+
+}

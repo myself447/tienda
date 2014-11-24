@@ -33,7 +33,7 @@
        string command = String.Format(@"INSERT INTO Producto(Titulo, Portada, Precio, Referencia, Descripcion, Fecha_entrada)values(
         '{0}', 'portadas/{1}', {2}, '{3}', '{4}', {5})", 
         producto["titulo"], archivos[0].FileName.ToString(), producto["precio"], producto["ref"], producto["desc"], 
-        Convert.ToInt64(fecha.Year.ToString()+fecha.Month.ToString()+fecha.Day.ToString()+fecha.Hour.ToString()+fecha.Minute.ToString()+fecha.Second.ToString()) );
+        Convert.ToInt64(fecha.Year.ToString()+fecha.Month.ToString()+fecha.Day.ToString() ) );
        todb.Query(command);
        todb.Close();
        }catch(Exception e){

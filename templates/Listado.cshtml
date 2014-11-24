@@ -5,7 +5,7 @@
     var pagina = Request.QueryString["pagina"];
     var offset=7;
     if(pagina.AsInt()!=1){ offset=(pagina.AsInt()*4)+7; } 
-    string query = String.Format("select * from Producto order by Fecha_entrada desc offset {0} rows fetch next 8 rows only",offset);
+    string query = String.Format("select * from Producto order by Id desc offset {0} rows fetch next 8 rows only",offset);
     var records = conexion.Query(query);
     var num = conexion.QuerySingle("select COUNT(*) from Producto");
     int limite=num[0]-7;

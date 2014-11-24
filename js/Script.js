@@ -48,22 +48,28 @@
 $('.datepicker').pikaday({ firstDay: 1 });
 
 // chain a few methods for the first datepicker, jQuery style!
-$('.datepicker').eq(0).pikaday('show').pikaday('gotoYear', 2042);
+//$('.datepicker').eq(0).pikaday('show').pikaday('gotoYear', 2042);
 
 $('#bt').click(
 function () {
+
+
 
     var consulta = $('#rConsulta').prop('checked'); var reporte = $('#rReporte').prop('checked');
     $.ajax({
         type: "GET",
         url: "admin_templates/Informe.cshtml",
         dataType: "html",
-        data: { "consulta": consulta, "reporte": reporte },
+        data: { "consulta": consulta, "reporte": reporte, "fecha":$("#desde").val() },
         success: function (html) {
-        
+
             $('#informe').html((html));
         }
     });
+
+    
+
+
 });
 
 function buscar_portada(){
@@ -126,6 +132,7 @@ document.body.onload = function () {
 
     document.getElementById('rConsulta').checked = false;
     document.getElementById('rReporte').checked = false;
+    //document.body.click();
 
 }
 
@@ -232,5 +239,18 @@ function reporte(mi){
 function selected(mi){
     document.getElementById('bt').style.display = "inline-block";
     document.getElementById('dropdownMenu1').childNodes[0].nodeValue = mi.innerHTML;
+
+    switch(mi.innerHTML){
+        case 'Fecha de entrada':
+            document.getElementById('informar2').innerHTML = "Desde: <input class='datepicker' id='desde' data-date-format='mm/dd/yyyy hh:mm' style='margin-right:5px;'> \
+            Hasta: <input class='datepicker' id='hasta' data-date-format='mm/dd/yyyy'>";
+            $('.datepicker').pikaday({ firstDay: 1 });
+            break;
+
+        default:
+
+            break;
+
+    }
     
 }
