@@ -120,63 +120,117 @@ function cambio(element){
     }
 }
 
-document.body.onload = function () { formulario = document.getElementById('data').innerHTML; }
+document.body.onload = function () {
+
+    formulario = document.getElementById('data').innerHTML;
+
+    document.getElementById('rConsulta').checked = false;
+    document.getElementById('rReporte').checked = false;
+
+}
 
 //var data = document.getElementById('data').innerHTML;
 function upload(element) {
-    
-    var portada = document.getElementsByName('buscar')[0];
+    if ($("input[name=buscar]").val() != "") {
+        portada = document.getElementsByName('buscar')[0];
+    }
+    else {
+        //alert("yo");
+        portada = null; 
+    }
     var archivos = document.querySelectorAll("#producto div:nth-of-type(6) ~ div input[type=file]");
     var form = document.getElementById('data');
-
+    
     form.onsubmit = function (event) {
 
         event.preventDefault();
-        document.getElementById('up').style.display = "inline";
+        //document.getElementById('up').style.display = "inline";
+    }
+   
+    var validacion = false;
+    for (var j = 0; j < archivos.length; j++) {
+        if (archivos[j].value != "") {
+            validacion = true;
+        }
     }
 
+     
+    //alert(validacion);
     
 
-    /* Create a FormData instance */
-    var formData = new FormData();
-    /* Add the file */
-
-
-    formData.append("accion", element.value); 
-    formData.append("uploads[]", portada.files[0], portada.files[0].name);
-    for(var i=0;i<archivos.length-1;i++){
-        var archivo = archivos[i];
-        formData.append("uploads[]", archivo.files[0], archivo.files[0].name);
-    } 
-
-    formData.append("titulo", $("input[name=titulo]").val());
-    formData.append("precio", $("input[name=precio]").val());
-    formData.append("ref", $("#ref").val());
-    formData.append("desc", $("#desc").val());
-    //alert($("#ref").val() + " " + $("#desc").val()) ;  
-
-
-    var client = new XMLHttpRequest();
-
-    client.open("POST", "admin_templates/TestUpload.cshtml", true);
-    //client.setRequestHeader("Content-Type", "multipart/form-data");
-
-
-    /* Check the response status */
-    client.onreadystatechange = function () {
-        if (client.readyState == 4 && client.status == 200) {
-
-            alert(client.statusText + " Guardado! " + client.responseText);
-            document.getElementById('up').style.display = "none";
-           document.getElementById('data').innerHTML = formulario;
-        }
-        else {
-
-            //alert("Un Error Ocurrió");
-        }
-    }
-//client.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    client.send(formData);  /* Send to server */
-      
+    if(portada != null && $("input[name=titulo]").val() != "" && $("input[name=precio]").val()!="" && $("#ref").val()!="" && $("#desc").val()!="" && validacion==true){
         
+        /* Create a FormData instance */
+        var formData = new FormData();
+        /* Add the file */
+         //alert("que!");
+
+        formData.append("accion", element.value); 
+        formData.append("uploads[]", portada.files[0], portada.files[0].name);
+        for(var i=0;i<archivos.length-1;i++){
+            var archivo = archivos[i];
+            formData.append("uploads[]", archivo.files[0], archivo.files[0].name);
+        } 
+
+        formData.append("titulo", $("input[name=titulo]").val());
+        formData.append("precio", $("input[name=precio]").val());
+        formData.append("ref", $("#ref").val());
+        formData.append("desc", $("#desc").val());
+        //alert($("#ref").val() + " " + $("#desc").val()) ;  
+
+
+        var client = new XMLHttpRequest();
+
+        client.open("POST", "admin_templates/TestUpload.cshtml", true);
+        //client.setRequestHeader("Content-Type", "multipart/form-data");
+
+
+        /* Check the response status */
+        client.onreadystatechange = function () {
+            if (client.readyState == 4 && client.status == 200) {
+
+                alert(client.statusText + " Guardado! " + client.responseText);
+                //document.getElementById('up').style.display = "none";
+               document.getElementById('data').innerHTML = formulario;
+            }
+            else {
+
+                //alert("Un Error Ocurrió");
+            }
+        }
+    //client.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        client.send(formData);  /* Send to server */
+      
+    } else{
+
+    alert("Llene todos los campos y selecione al menos una grabación");
+    }   
+}
+
+function consulta(){
+    document.getElementById('por').style.display = "inline-block";
+    document.getElementById('informar').innerHTML = "<div class='dropdown' id='menu1'> \
+                                                          <button class='btn btn-default dropdown-toggle' type='button' id='dropdownMenu1' data-toggle='dropdown' aria-expanded='true'> \
+                                                            Seleccionar \
+                                                            <span>&nbsp;</span><span class='caret'></span> \
+                                                          </button> \
+                                                          <ul class='dropdown-menu' role='menu' aria-labelledby='dropdownMenu1'> \
+                                                            <li role='presentation'><a role='menuitem' tabindex='-1' href='#' onclick='selected(this);'>Fecha de entrada</a></li> \
+                                                            <li role='presentation'><a role='menuitem' tabindex='-1' href='#' onclick='selected(this);'>Titulo</a></li> \
+                                                            <li role='presentation'><a role='menuitem' tabindex='-1' href='#' onclick='selected(this);'>Precio</a></li> \
+                                                            <li role='presentation'><a role='menuitem' tabindex='-1' href='#' onclick='selected(this);'>Calificación</a></li> \
+                                                          </ul> \
+                                                     </div> ";
+
+}
+
+function reporte(mi){
+
+    document.getElementById('por').style.display = "inline-block";
+}
+
+function selected(mi){
+    document.getElementById('bt').style.display = "inline-block";
+    document.getElementById('dropdownMenu1').childNodes[0].nodeValue = mi.innerHTML;
+    
 }

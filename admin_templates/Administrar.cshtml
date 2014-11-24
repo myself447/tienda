@@ -65,22 +65,20 @@
             <div class="panel-heading" id="info">
                
                     <span>
-                        <input name="radiog_dark" id="rConsulta" class="css-checkbox" name="informe" type="radio">
+                        <input name="radiog_dark" id="rConsulta" class="css-checkbox" name="informe" type="radio" onclick="consulta();">
                         <label for="rConsulta" class="css-label radGroup2">Consulta</label>
                     </span>
                     <span>
-                        <input name="radiog_dark" id="rReporte" class="css-checkbox" checked="checked" name="informe" type="radio">
+                        <input name="radiog_dark" id="rReporte" class="css-checkbox" checked="checked" name="informe" type="radio" onclick="reporte();">
                         <label for="rReporte" class="css-label radGroup2">Reporte</label>
                     </span>
-                    <input type="button" id="bt" value="click me!" />
-                    <select hidden>
-                        <option>Fecha de entrada</option>
-                        <option>Titulo</option>
-                        <option>Precio</option>
-                        <option>Estrellas</option>
-                    </select>
+                    <span style="font-size: 1.5em; font-weight: bold; margin-left: 10px; margin-right: 5px; display: none" id="por">Por</span>
+                    <span id="informar" style="display: inline-block;"></span>
+                    
                 
-                
+            </div>
+            <div class="panel-heading" id="info2">
+                <input type="button" class="btn btn-default" id="bt" value="Ver" style="display: none;" />
             </div>
             <div class="panel-body" id="informe">
                 conenido
