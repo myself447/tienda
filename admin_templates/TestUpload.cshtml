@@ -29,10 +29,11 @@
         // Guardado de datos inicio
         try{
         var todb = Database.Open("disco");
-        string command = String.Format(@"INSERT INTO Producto(Titulo, Portada, Precio, Referencia, Descripcion, Fecha_entrada)values(
+        var fecha = DateTime.Now;
+       string command = String.Format(@"INSERT INTO Producto(Titulo, Portada, Precio, Referencia, Descripcion, Fecha_entrada)values(
         '{0}', 'portadas/{1}', {2}, '{3}', '{4}', {5})", 
         producto["titulo"], archivos[0].FileName.ToString(), producto["precio"], producto["ref"], producto["desc"], 
-        Convert.ToInt32(DateTime.Now.Year.ToString()+DateTime.Now.Month.ToString()+DateTime.Now.Day.ToString()) );
+        Convert.ToInt64(fecha.Year.ToString()+fecha.Month.ToString()+fecha.Day.ToString()+fecha.Hour.ToString()+fecha.Minute.ToString()+fecha.Second.ToString()) );
        todb.Query(command);
        todb.Close();
        }catch(Exception e){
@@ -51,7 +52,7 @@
 
 
 @{
-<text>@DateTime.Now.ToFileTime()</text>
+/*text>@DateTime.Now.ToFileTime()</text>
 <text>@DateTime.FromFileTime(DateTime.Now.ToFileTime()).ToShortDateString()</text>      
 
 <text>@DateTime.Now</text>  
@@ -60,5 +61,5 @@
 <text>@DateTime.Now.ToLocalTime()</text> 
 <text>@DateTime.Now.ToOADate()</text>  
 <text>@DateTime.Now.ToString()</text>  
-<text>@DateTime.Now.ToLongTimeString()</text>   
+<text>@DateTime.Now.ToLongTimeString()</text>*/ 
 }

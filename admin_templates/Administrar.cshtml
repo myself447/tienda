@@ -26,8 +26,8 @@
                 <div class="input-group">
                     @*<span class="input-group-addon" >Portada:</span>*@
                     <input type="text" class="form-control" name="portada" placeholder="Busque la Portada">
-                    <input type="file" id="buscar" name="buscar" accept="image/x-png, image/gif, image/jpeg">
-                    <span class="input-group-addon" ><span class="glyphicon glyphicon-search"></span></span>
+                    <input type="file" name="buscar" onchange="get_portada(this);" accept="image/x-png, image/gif, image/jpeg">
+                    <span class="input-group-addon" id="buscar" onclick="buscar_portada();"><span class="glyphicon glyphicon-search"></span></span>
                     
                 </div>
                 <div class="input-group">
@@ -98,3 +98,50 @@
     Response.Redirect("/");
 }
 
+@*<div hidden id="refrescar">
+
+ <div class="panel panel-default">
+            <div class="panel-heading"  style="font-size: 1.5em; font-weight: bold;">
+                Producto
+            </div>
+            
+            <div class="panel-body" id="producto">
+                <div class="input-group">
+                    <span class="input-group-addon">Título:</span>
+                    <input type="text" class="form-control" name="titulo" placeholder="Entre el Título">
+                </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="portada" placeholder="Busque la Portada">
+                    <input type="file" id="buscar" name="buscar" accept="image/x-png, image/gif, image/jpeg">
+                    <span class="input-group-addon" ><span class="glyphicon glyphicon-search"></span></span>
+                    
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">Precio:</span>
+                    <input type="text" class="form-control" name="precio" placeholder="Entre el Precio">
+                </div>
+                <div class="input-group" style="display: none;">
+                    <span class="input-group-addon">Estrellas(Valoración):</span>
+                    <input type="text" class="form-control" placeholder="Valoración">
+                </div>
+
+                <div class="input-group">
+                    <textarea class="form-control" placeholder="Referencia" name="ref" id="ref" style="min-width: 270px;"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <textarea class="form-control" placeholder="Descripción" name="desc" id="desc" style="min-width: 270px;"></textarea>
+                </div>
+                
+                <div class="input-group">
+                    <input type="text" name="ruta" class="form-control" id="busqueda1" placeholder="Busque Grabación">
+                    <input type="file" name="busqueda1" onchange="cambio(this);">
+                    <span class="input-group-addon" id="1" onclick="grabs(this);"><span class="glyphicon glyphicon-search"></span></span>
+                </div>
+              
+            </div>
+            <div class="panel-footer"><input type="submit" class="btn btn-default" id="add_update" onclick="upload(this);" value="Agregar Producto"><span id="up" style="display: none;"><img alt="Cargando..." src='img/loading45.gif' /></span></div>
+   
+        </div>
+
+</div>*@

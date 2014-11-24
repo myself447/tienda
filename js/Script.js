@@ -66,13 +66,27 @@ function () {
     });
 });
 
-$("#producto div:nth-of-type(2) > span").click(function () {
+function buscar_portada(){
+
+    $("input[name=buscar]").click();
+
+    
+   // alert('hola');
+
+}
+
+function get_portada(element){
+    
+    $("input[name='portada']").attr("value", element.value);
+
+}
+/*$("#producto div:nth-of-type(2) > span").click(function () {
     $("#buscar").click();
 });
 
 $("#buscar").change(function(){
     $("input[name='portada']").attr("value",$("#buscar").val());
-});
+});*/
 
 
 function grabs(element){
@@ -106,30 +120,34 @@ function cambio(element){
     }
 }
 
+document.body.onload = function () { formulario = document.getElementById('data').innerHTML; }
 
+//var data = document.getElementById('data').innerHTML;
 function upload(element) {
     
-    var portada = document.getElementById('buscar');
+    var portada = document.getElementsByName('buscar')[0];
     var archivos = document.querySelectorAll("#producto div:nth-of-type(6) ~ div input[type=file]");
     var form = document.getElementById('data');
 
-    data.onsubmit = function (event) {
+    form.onsubmit = function (event) {
 
         event.preventDefault();
         document.getElementById('up').style.display = "inline";
     }
 
-
+    
 
     /* Create a FormData instance */
     var formData = new FormData();
     /* Add the file */
-    formData.append("accion", element.value);
+
+
+    formData.append("accion", element.value); 
     formData.append("uploads[]", portada.files[0], portada.files[0].name);
     for(var i=0;i<archivos.length-1;i++){
         var archivo = archivos[i];
         formData.append("uploads[]", archivo.files[0], archivo.files[0].name);
-    }
+    } 
 
     formData.append("titulo", $("input[name=titulo]").val());
     formData.append("precio", $("input[name=precio]").val());
@@ -148,8 +166,9 @@ function upload(element) {
     client.onreadystatechange = function () {
         if (client.readyState == 4 && client.status == 200) {
 
-            alert(client.statusText + " " + client.responseText);
-            document.getElementById('up').style.display="none";
+            alert(client.statusText + " Guardado! " + client.responseText);
+            document.getElementById('up').style.display = "none";
+           document.getElementById('data').innerHTML = formulario;
         }
         else {
 
