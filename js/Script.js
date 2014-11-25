@@ -315,6 +315,7 @@ function selected(mi){
             break;
 
     }
+    por+='<input type="button" class="btn btn-default btn-md" id="bt" value="Ver" onclick="informes();" style="display:inline-block;" />';
     document.getElementById('informar2').innerHTML = por;
     $('.datepicker').pikaday({ firstDay: 1 });
     
