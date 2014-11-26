@@ -21,7 +21,7 @@
         con.send();
     }*/
 
-
+     
 
     $("#ver_login").click(function () {
         $("#adm_login").slideToggle();
